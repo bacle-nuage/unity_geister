@@ -44,6 +44,11 @@ namespace DefaultNamespace
                 {
                     hit = RayWrapper.MousePositionRaycast();
 
+                    if (!hit)
+                    {
+                        return;
+                    }
+
                     if (hit && hit.collider.gameObject == owner.gameObject)
                     {
                         owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().IsTouched = false;

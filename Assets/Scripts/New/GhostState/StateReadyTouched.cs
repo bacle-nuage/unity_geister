@@ -27,7 +27,7 @@ namespace DefaultNamespace
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    hit = RayWrapper.Raycast();
+                    hit = RayWrapper.MousePositionRaycast();
 
                     if (hit && hit.collider.gameObject == owner.gameObject)
                     {

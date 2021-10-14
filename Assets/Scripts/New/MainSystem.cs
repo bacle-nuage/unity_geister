@@ -23,11 +23,17 @@ public class MainSystem : MonoBehaviour
     private GameObject _changedPlayerPanel;
     
     private ReactiveProperty<bool> _isGameOver = new ReactiveProperty<bool>();
+    
     private ReactiveProperty<bool> _isPlayer1 = new ReactiveProperty<bool>();
     
     private Unit _winner;
-    [SerializeField] private Text _winnerText;
+    
+    [SerializeField] 
+    private Text _winnerText;
 
+    [SerializeField]
+    private Text _changedPlayerText;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +58,9 @@ public class MainSystem : MonoBehaviour
         _changedPlayerPanel.SetActive(true);
         _player2.IsActive.Value = false;
         _player1.IsActive.Value = false;
+        
+        _player2.LastMoved.Value = null;
+        _player1.LastMoved.Value = null;
         
         if (_isPlayer1.Value)
         {
@@ -87,11 +96,14 @@ public class MainSystem : MonoBehaviour
             {
                 _player2.IsActive.Value = false;
                 _player1.IsActive.Value = true;
+                _changedPlayerText.text = "プレイヤー１のターンです";
             }
             else
             {
                 _player1.IsActive.Value = false;
                 _player2.IsActive.Value = true;
+                _changedPlayerText.transform.Rotate(0,0,180);
+                _changedPlayerText.text = "プレイヤー２のターンです";
             }
         });
     }
@@ -127,5 +139,10 @@ public class MainSystem : MonoBehaviour
     {
         String to = "TitleScene";
         SceneManager.LoadScene(to);
+    }
+
+    public void onClickRetryButton()
+    {
+        SceneManager.LoadScene (SceneManager.GetActiveScene().name);
     }
 }

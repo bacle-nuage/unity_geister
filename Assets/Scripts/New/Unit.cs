@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using DefaultNamespace.Services;
+using JetBrains.Annotations;
 using UniRx;
 using UnityEngine;
 
@@ -72,6 +75,23 @@ namespace DefaultNamespace
             get => _name;
         }
 
+        // private ReactiveProperty<Vector3[,]> _lastMoved;
+
+        public ReactiveProperty<Vector3[,]> LastMoved = new ReactiveProperty<Vector3[,]>();
+        // public ReactiveProperty<Vector3[,]> LastMoved
+        // {
+        //     get => _lastMoved;
+        //     set => _lastMoved = value;
+        // }
+
+        [SerializeField]
+        private GameObject _prevButton;
+
+        public GameObject PrevButton
+        {
+            get => _prevButton;
+        }
+
         private void Awake()
         {
             // _currentState = _stateUnActive;
@@ -81,6 +101,8 @@ namespace DefaultNamespace
         {
             // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             // _currentState.OnEnter(this, null);
+            LastMovedListener();
+            _prevButton.SetActive(false);
         }
 
         private void Update()
@@ -93,6 +115,48 @@ namespace DefaultNamespace
         {
             // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             // _currentState.OnFixedUpdate(this);
+        }
+
+        public void OnClickPrevButton()
+        {
+            if (_prevButton)
+            {
+                Debug.Log("LastMoved.Value = " + LastMoved.Value);
+                Vector3 pos1 = LastMoved.Value[0, 0];
+                Vector3 pos2 = LastMoved.Value[0, 1];
+                
+                RaycastHit2D hit1 = RayWrapper.Raycast(Camera.main.WorldToScreenPoint(pos1));
+                RaycastHit2D hit2 = RayWrapper.Raycast(Camera.main.WorldToScreenPoint(pos2));
+                
+                LastMoved.Value = null;
+                hit1.transform.position = pos2;
+                hit2.transform.position = pos1;
+
+                LastMoved.Value = null;
+                IsMoved = false;
+
+                Debug.Log(hit2);
+                Debug.Log(hit2.collider);
+                Debug.Log(hit2.collider.gameObject);
+                Debug.Log(hit2.collider.gameObject.GetComponent<Ghost>());
+                
+                hit2.collider.gameObject.GetComponent<Ghost>().ChangeState(hit2.collider.gameObject.GetComponent<Ghost>()._statePlay);
+            }
+        }
+
+        private void LastMovedListener()
+        {
+            LastMoved.Subscribe((_lastMoved) =>
+            {
+                if (_lastMoved is null)
+                {
+                    _prevButton.SetActive(false);
+                }
+                else
+                {
+                    _prevButton.SetActive(true);
+                }
+            });
         }
     }
 }

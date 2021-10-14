@@ -26,7 +26,7 @@ namespace DefaultNamespace
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    RaycastHit2D hit = RayWrapper.Raycast();
+                    RaycastHit2D hit = RayWrapper.MousePositionRaycast();
 
                     // 親プレーヤーを取得
                     Unit Unit = owner.gameObject.transform.parent.gameObject.GetComponent<Unit>();

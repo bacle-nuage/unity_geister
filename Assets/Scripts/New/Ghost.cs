@@ -31,6 +31,7 @@ namespace DefaultNamespace
         /// <summary>
         /// 現在のゴーストの色
         /// </summary>
+        [SerializeField]
         private GhostColor _myColor;
 
         public GhostColor MyColor
@@ -49,6 +50,14 @@ namespace DefaultNamespace
         [SerializeField]
         private GameObject _dummyGhost;
 
+        [SerializeField]
+        private Sprite _hiddenSprite;
+
+        public Sprite HiddenSprite
+        {
+            get => _hiddenSprite;
+        }
+
         private void Awake()
         {
             
@@ -56,13 +65,14 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            _myColor = GetMyColor();
+            // _myColor = GetMyColor();
             // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             _player = this.gameObject.transform.parent.gameObject;
             _currentState = _stateReady;
             _currentColor = GetColor(GhostColor.Gray);
             _currentState.OnEnter(this, null);
             UnitIsActiveListener();
+            // _player.gameObject.GetComponent<Unit>().LastMoved.Value = new Vector3[,] {{this.gameObject.transform.position, this.gameObject.transform.position}};
         }
 
         private void Update()
@@ -145,25 +155,25 @@ namespace DefaultNamespace
                 });
         }
 
-        private GhostColor GetMyColor()
-        {
-            Color color = this.gameObject.GetComponent<SpriteRenderer>().color;
-
-            GhostColor MyColor;
-            if (color == Color.red)
-            {
-                MyColor = GhostColor.Red;
-            }
-            else if (color == Color.blue)
-            {
-                MyColor = GhostColor.Blue;
-            }
-            else
-            {
-                MyColor = GhostColor.Gray;
-            }
-
-            return MyColor;
-        }
+        // private GhostColor GetMyColor()
+        // {
+        //     Color color = this.gameObject.GetComponent<SpriteRenderer>().color;
+        //
+        //     GhostColor MyColor;
+        //     if (color == Color.red)
+        //     {
+        //         MyColor = GhostColor.Red;
+        //     }
+        //     else if (color == Color.blue)
+        //     {
+        //         MyColor = GhostColor.Blue;
+        //     }
+        //     else
+        //     {
+        //         MyColor = GhostColor.Gray;
+        //     }
+        //
+        //     return MyColor;
+        // }
     }
 }

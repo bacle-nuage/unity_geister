@@ -24,6 +24,11 @@ namespace DefaultNamespace
             public override void OnEnter(Ghost owner, GhostStateBase prevState)
             {
                 // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
+                // Debug.Log(owner.gameObject);
+                // Debug.Log(owner.gameObject.transform.parent.gameObject);
+                // Debug.Log(owner.gameObject.transform.parent.gameObject.GetComponent<Unit>());
+                // owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().PrevButton.SetActive(true);
+                Debug.Log(owner.transform.position);
             }
             
             // if分の中のにはいったかどうか
@@ -37,7 +42,7 @@ namespace DefaultNamespace
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    hit = RayWrapper.Raycast();
+                    hit = RayWrapper.MousePositionRaycast();
 
                     if (hit && hit.collider.gameObject == owner.gameObject)
                     {
@@ -50,11 +55,18 @@ namespace DefaultNamespace
                     Unit Unit = owner.gameObject.transform.parent.gameObject.GetComponent<Unit>();
                     
                     // 別の自分のゴーストにタップされたらそのゴーストと場所を入れ替える
-                    String target_1 = "Unit";
+                    // String target_1 = "Unit";
 
                     
                     // Debug.Log(hit.collider.gameObject.transform.parent.gameObject.GetComponent<Unit>());
                     // Debug.Log(hit.collider.gameObject.transform.parent.gameObject.GetComponent<Unit>()?.name == target_1 );
+
+                    // RedがGoalに来たときは何もせず終了
+                    if (hit.collider.gameObject.GetComponent<Gool>()
+                        && owner.gameObject.GetComponent<Ghost>().MyColor == GhostColor.Red)
+                    {
+                        return;
+                    }
                     
                     if (_hitFlg == HitItem.None 
                         && Unit.IsTouched 
@@ -62,9 +74,10 @@ namespace DefaultNamespace
                         && hit.collider.gameObject.transform.parent.gameObject != owner.gameObject.transform.parent.gameObject
                         && hit.collider.gameObject.GetComponent<Gool>()
                         && this.isOkArea(owner, hit)
-                        && owner.gameObject.GetComponent<Ghost>().MyColor == GhostColor.Red
+                        && owner.gameObject.GetComponent<Ghost>().MyColor == GhostColor.Blue
                     )
                     {
+                        Debug.Log("HitItem.Goal");
                         _hitFlg = HitItem.Goal;
                     }
 
@@ -76,6 +89,7 @@ namespace DefaultNamespace
                         && this.isOkArea(owner, hit)
                     )
                     {
+                        Debug.Log("HitItem.Enemy");
                         _hitFlg = HitItem.Enemy;
                     }
                     
@@ -103,6 +117,7 @@ namespace DefaultNamespace
                     Vector3 pos1 = owner.transform.position;
                     Vector3 pos2 = hit.transform.position;
 
+                    owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().LastMoved.Value = new Vector3[,] {{pos1, pos2}};
                     owner.transform.position = pos2;
                     hit.transform.position = pos1;
                     
@@ -124,6 +139,7 @@ namespace DefaultNamespace
                     Vector3 pos1 = owner.transform.position;
                     Vector3 pos2 = hit.transform.position;
 
+                    owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().LastMoved.Value = new Vector3[,] {{pos1, pos2}};
                     owner.transform.position = pos2;
                     hit.transform.position = pos1;
                     
@@ -152,7 +168,8 @@ namespace DefaultNamespace
                 {
                     Vector3 pos1 = owner.transform.position;
                     Vector3 pos2 = hit.transform.position;
-
+                    
+                    owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().LastMoved.Value = new Vector3[,] {{pos1, pos2}};
                     owner.transform.position = pos2;
                     hit.transform.position = pos1;
 
@@ -170,11 +187,15 @@ namespace DefaultNamespace
                     _hitFlg = HitItem.None;
                 }
             }
-            
+
             /// <summary>
             /// ステートを終了した時に呼ばれる
             /// </summary>
-            public override void OnExit(Ghost owner, GhostStateBase nextState) { }
+            public override void OnExit(Ghost owner, GhostStateBase nextState)
+            {
+                // owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().PrevButton.SetActive(false);
+                Debug.Log(owner.transform.position);
+            }
 
             private bool isOkArea(Ghost owner, RaycastHit2D hit)
             {
@@ -185,7 +206,7 @@ namespace DefaultNamespace
 
                 float limit = 2f;
                 float dis = Vector3.Distance(ownerPos, hitPos);
-                Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "() dis = " + dis);
+                // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "() dis = " + dis);
 
                 if (dis > limit)
                 {

@@ -62,6 +62,9 @@ public class MainSystem : MonoBehaviour
         _player2.LastMoved.Value = null;
         _player1.LastMoved.Value = null;
         
+        _player2.LastEated = null;
+        _player1.LastEated = null;
+        
         if (_isPlayer1.Value)
         {
             _player1.IsReady = false;

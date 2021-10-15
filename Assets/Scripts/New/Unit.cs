@@ -84,6 +84,14 @@ namespace DefaultNamespace
         //     set => _lastMoved = value;
         // }
 
+        private GameObject _lastEated = null;
+
+        public GameObject LastEated
+        {
+            get => _lastEated;
+            set => _lastEated = value;
+        }
+
         [SerializeField]
         private GameObject _prevButton;
 
@@ -121,9 +129,25 @@ namespace DefaultNamespace
         {
             if (_prevButton)
             {
-                Debug.Log("LastMoved.Value = " + LastMoved.Value);
                 Vector3 pos1 = LastMoved.Value[0, 0];
                 Vector3 pos2 = LastMoved.Value[0, 1];
+                
+                if (LastEated)
+                {
+                    RaycastHit2D hit0 = RayWrapper.Raycast(Camera.main.WorldToScreenPoint(pos1));
+                    Destroy(hit0.collider);
+                    LastEated.SetActive(true);
+                    
+                    switch (LastEated.gameObject.GetComponent<Ghost>().MyColor)
+                    {
+                        case Ghost.GhostColor.Red:
+                            Score.gameObject.GetComponent<Score>().redRemoveScore();
+                            break;
+                        case Ghost.GhostColor.Blue:
+                            Score.gameObject.GetComponent<Score>().blueRemoveScore();
+                            break;
+                    }
+                }
                 
                 RaycastHit2D hit1 = RayWrapper.Raycast(Camera.main.WorldToScreenPoint(pos1));
                 RaycastHit2D hit2 = RayWrapper.Raycast(Camera.main.WorldToScreenPoint(pos2));
@@ -134,11 +158,7 @@ namespace DefaultNamespace
 
                 LastMoved.Value = null;
                 IsMoved = false;
-
-                Debug.Log(hit2);
-                Debug.Log(hit2.collider);
-                Debug.Log(hit2.collider.gameObject);
-                Debug.Log(hit2.collider.gameObject.GetComponent<Ghost>());
+                LastEated = null;
                 
                 hit2.collider.gameObject.GetComponent<Ghost>().ChangeState(hit2.collider.gameObject.GetComponent<Ghost>()._statePlay);
             }

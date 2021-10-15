@@ -26,10 +26,20 @@ namespace DefaultNamespace
         {
             _redScore.Value++;
         }
+
+        public void redRemoveScore()
+        {
+            _redScore.Value--;
+        }
         
         public void blueAddScore()
         {
             _blueScore.Value++;
+        }
+        
+        public void blueRemoveScore()
+        {
+            _blueScore.Value--;
         }
  
         void Update()

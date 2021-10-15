@@ -148,9 +148,11 @@ namespace DefaultNamespace
                     owner.transform.position = pos2;
                     hit.transform.position = pos1;
                     
+                    
                     hit.collider.gameObject.SetActive(false);
                     GameService.createDummyGhost(pos1);
                  
+                    owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().LastEated = hit.collider.gameObject;
                     Unit Unit = owner.gameObject.transform.parent.GetComponent<Unit>();
                     Score Score = Unit.Score.gameObject.GetComponent<Score>();
                     switch (hit.collider.gameObject.GetComponent<Ghost>().MyColor)

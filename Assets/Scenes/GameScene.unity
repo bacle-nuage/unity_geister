@@ -475,10 +475,10 @@ RectTransform:
   m_LocalScale: {x: 2.6183, y: 2.6183, z: 2.6183}
   m_Children:
   - {fileID: 2026117391}
+  - {fileID: 1265622177}
   - {fileID: 837023742}
   - {fileID: 1041743211}
   - {fileID: 694149134}
-  - {fileID: 1265622177}
   - {fileID: 941213717}
   - {fileID: 1145079107}
   - {fileID: 1426231026}
@@ -510,6 +510,7 @@ MonoBehaviour:
   _score: {fileID: 916939836}
   _name: "\u30D7\u30EC\u30A4\u30E4\u30FC\uFF11"
   _prevButton: {fileID: 1231866597}
+  _turnEndButton: {fileID: 278339775}
 --- !u!1 &76150038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,7 +2755,7 @@ RectTransform:
   m_LocalScale: {x: 150, y: 150, z: 5.6031}
   m_Children: []
   m_Father: {fileID: 58588261}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3210,7 +3211,7 @@ RectTransform:
   m_LocalScale: {x: 150, y: 150, z: 5.6031}
   m_Children: []
   m_Father: {fileID: 58588261}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4266,7 +4267,7 @@ RectTransform:
   m_LocalScale: {x: 150, y: 150, z: 5.6031}
   m_Children: []
   m_Father: {fileID: 58588261}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5026,6 +5027,7 @@ MonoBehaviour:
   _score: {fileID: 854684633}
   _name: "\u30D7\u30EC\u30A4\u30E4\u30FC\uFF12"
   _prevButton: {fileID: 1973082325}
+  _turnEndButton: {fileID: 368824280}
 --- !u!224 &1207284556
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5222,7 +5224,7 @@ RectTransform:
   m_LocalScale: {x: 150, y: 150, z: 5.6031}
   m_Children: []
   m_Father: {fileID: 58588261}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

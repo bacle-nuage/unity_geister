@@ -14,6 +14,7 @@ namespace DefaultNamespace
             public override void OnEnter(Ghost owner, GhostStateBase prevState)
             {
                 // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
+                owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().TurnEndButton.SetActive(true);
             }
             
             // if分の中のにはいったかどうか

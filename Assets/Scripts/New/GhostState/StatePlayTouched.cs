@@ -201,7 +201,8 @@ namespace DefaultNamespace
             public override void OnExit(Ghost owner, GhostStateBase nextState)
             {
                 // owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().PrevButton.SetActive(false);
-                Debug.Log(owner.transform.position);
+                // Debug.Log(owner.transform.position);
+                owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().TurnEndButton.SetActive(true);
             }
 
             private bool isOkArea(Ghost owner, RaycastHit2D hit)

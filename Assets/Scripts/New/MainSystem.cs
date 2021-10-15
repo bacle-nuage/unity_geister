@@ -56,6 +56,7 @@ public class MainSystem : MonoBehaviour
     {
         // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
         _changedPlayerPanel.SetActive(true);
+        
         _player2.IsActive.Value = false;
         _player1.IsActive.Value = false;
         
@@ -64,6 +65,9 @@ public class MainSystem : MonoBehaviour
         
         _player2.LastEated = null;
         _player1.LastEated = null;
+        
+        _player2.TurnEndButton.SetActive(false);
+        _player1.TurnEndButton.SetActive(false);
         
         if (_isPlayer1.Value)
         {

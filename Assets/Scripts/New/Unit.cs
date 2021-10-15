@@ -38,7 +38,7 @@ namespace DefaultNamespace
         }
 
         /// <summary>
-        /// タッチされているか
+        /// 
         /// </summary>
         private bool _isMoved = false;
 
@@ -100,6 +100,14 @@ namespace DefaultNamespace
             get => _prevButton;
         }
 
+        [SerializeField]
+        private GameObject _turnEndButton;
+
+        public GameObject TurnEndButton
+        {
+            get => _turnEndButton;
+        }
+
         private void Awake()
         {
             // _currentState = _stateUnActive;
@@ -159,6 +167,7 @@ namespace DefaultNamespace
                 LastMoved.Value = null;
                 IsMoved = false;
                 LastEated = null;
+                TurnEndButton.SetActive(false);
                 
                 hit2.collider.gameObject.GetComponent<Ghost>().ChangeState(hit2.collider.gameObject.GetComponent<Ghost>()._statePlay);
             }

@@ -23,6 +23,11 @@ public class MainSystem : MonoBehaviour
     private GameObject _changedPlayerPanel;
     
     private ReactiveProperty<bool> _isGameOver = new ReactiveProperty<bool>();
+
+    public ReactiveProperty<bool> IsGameOver
+    {
+        get => _isGameOver;
+    }
     
     private ReactiveProperty<bool> _isPlayer1 = new ReactiveProperty<bool>();
     
@@ -39,11 +44,13 @@ public class MainSystem : MonoBehaviour
     {
         // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
         OnChangedIsPlayerFlg();
-        OnChangedIsGameOverFlg();
+        ChangedGameOverListener();
         _resultPanel.SetActive(false);
         _changedPlayerPanel.SetActive(false);
         _isGameOver.Value = false;
         _isPlayer1.Value = true;
+        _player1.TurnEndButton.SetActive(false);
+        _player2.TurnEndButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -54,6 +61,10 @@ public class MainSystem : MonoBehaviour
 
     public void PushTurnEndButton()
     {
+        if (IsGameOver.Value)
+        {
+            return;
+        }
         // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
         _changedPlayerPanel.SetActive(true);
         
@@ -99,27 +110,30 @@ public class MainSystem : MonoBehaviour
         _isPlayer1.Subscribe((_isPlayer1) =>
         {
             // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
+            // _changedPlayerText.transform.Rotate(0,0,180);
             if (_isPlayer1)
             {
                 _player2.IsActive.Value = false;
                 _player1.IsActive.Value = true;
-                _changedPlayerText.text = "プレイヤー１のターンです";
+                _changedPlayerText.text = "プレイヤー2のターンです";
             }
             else
             {
                 _player1.IsActive.Value = false;
                 _player2.IsActive.Value = true;
-                _changedPlayerText.transform.Rotate(0,0,180);
-                _changedPlayerText.text = "プレイヤー２のターンです";
+                _changedPlayerText.text = "プレイヤー1のターンです";
             }
         });
     }
 
-    private void OnChangedIsGameOverFlg()
+    private void ChangedGameOverListener()
     {
         _isGameOver.Where(x => x)
             .Subscribe((_isGameOver) =>
             {
+                _player1.PrevButton.SetActive(false);
+                _player2.PrevButton.SetActive(false);
+                
                 if (_isPlayer1.Value)
                 {
                     _winner = _player1;
@@ -127,7 +141,7 @@ public class MainSystem : MonoBehaviour
                 else
                 {
                     _winner = _player2;
-                    _winnerText.transform.Rotate(0.0f, 0.0f, 180);
+                    _resultPanel.transform.Rotate(0.0f, 0.0f, 180);
                 }
 
                 _winnerText.text = _winner.Name + "の勝利";

@@ -28,17 +28,6 @@ namespace DefaultNamespace.Services
             newGameObject.GetComponent<BoxCollider2D>().size = size;
             newGameObject.transform.SetParent(parentGameObject.transform);
             newGameObject.transform.position = pos;
-
-            // String parentName = "Dummy";
-            // GameObject parentGameObject = GameObject.Find(parentName);
-            //
-            // GameObject newGameObject = Resources.Load("Prefab/dummy") as GameObject;
-            // // newGameObject.gameObject.transform.SetParent(parentGameObject.transform);
-            // newGameObject.gameObject.transform.position = pos;
-            //
-            // Debug.Log(newGameObject
-            //           // + "parent = " + newGameObject.transform.parent.name
-            //           + "pos = " + newGameObject.transform.position);
         }
     }
 }

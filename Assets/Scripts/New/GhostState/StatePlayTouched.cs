@@ -28,7 +28,7 @@ namespace DefaultNamespace
                 // Debug.Log(owner.gameObject.transform.parent.gameObject);
                 // Debug.Log(owner.gameObject.transform.parent.gameObject.GetComponent<Unit>());
                 // owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().PrevButton.SetActive(true);
-                Debug.Log(owner.transform.position);
+                // Debug.Log(owner.transform.position);
             }
             
             // if分の中のにはいったかどうか
@@ -82,7 +82,7 @@ namespace DefaultNamespace
                         && owner.gameObject.GetComponent<Ghost>().MyColor == GhostColor.Blue
                     )
                     {
-                        Debug.Log("HitItem.Goal");
+                        // Debug.Log("HitItem.Goal");
                         _hitFlg = HitItem.Goal;
                     }
 
@@ -94,7 +94,7 @@ namespace DefaultNamespace
                         && this.isOkArea(owner, hit)
                     )
                     {
-                        Debug.Log("HitItem.Enemy");
+                        // Debug.Log("HitItem.Enemy");
                         _hitFlg = HitItem.Enemy;
                     }
                     
@@ -106,7 +106,7 @@ namespace DefaultNamespace
                         && this.isOkArea(owner, hit)
                         )
                     {
-                        Debug.Log("HitItem.Dummy");
+                        // Debug.Log("HitItem.Dummy");
                         _hitFlg = HitItem.Dummy;
                     }
                 }

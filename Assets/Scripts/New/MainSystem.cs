@@ -38,6 +38,14 @@ public class MainSystem : MonoBehaviour
 
     [SerializeField]
     private Text _changedPlayerText;
+
+    [SerializeField]
+    private GameObject _initialPosLead;
+
+    public GameObject InitialPosLead
+    {
+        get => _initialPosLead;
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -47,7 +55,10 @@ public class MainSystem : MonoBehaviour
         ChangedGameOverListener();
         _resultPanel.SetActive(false);
         _changedPlayerPanel.SetActive(false);
+        // Debug.Log("initialPosLeadPanel false");
+        _initialPosLead.SetActive(false);
         _isGameOver.Value = false;
+        // Debug.Log("main system start isplayer1 = true");
         _isPlayer1.Value = true;
         _player1.TurnEndButton.SetActive(false);
         _player2.TurnEndButton.SetActive(false);
@@ -67,6 +78,8 @@ public class MainSystem : MonoBehaviour
         }
         // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
         _changedPlayerPanel.SetActive(true);
+        // Debug.Log("initialPosLeadPanel false 2");
+        _initialPosLead.SetActive(false);
         
         _player2.IsActive.Value = false;
         _player1.IsActive.Value = false;
@@ -101,7 +114,7 @@ public class MainSystem : MonoBehaviour
 
     public void ChangePlayer()
     {
-        // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
+        Debug.Log("changed player");
         _isPlayer1.Value = !_isPlayer1.Value;
     }
 
@@ -110,18 +123,21 @@ public class MainSystem : MonoBehaviour
         _isPlayer1.Subscribe((_isPlayer1) =>
         {
             // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-            // _changedPlayerText.transform.Rotate(0,0,180);
+            // Debug.Log("############# player changed ratate 180 _isPlayer1 = " + _isPlayer1);
+            // Debug.Log(_changedPlayerPanel.transform.localEulerAngles);
             if (_isPlayer1)
             {
                 _player2.IsActive.Value = false;
                 _player1.IsActive.Value = true;
-                _changedPlayerText.text = "プレイヤー2のターンです";
+                _changedPlayerText.text = "プレイヤー2のターンです。\n相手に渡してここをタップしてください。";
+                _changedPlayerPanel.transform.rotation = Quaternion.Euler(0, 0, 180);
             }
             else
             {
                 _player1.IsActive.Value = false;
                 _player2.IsActive.Value = true;
-                _changedPlayerText.text = "プレイヤー1のターンです";
+                _changedPlayerText.text = "プレイヤー1のターンです\n相手に渡してここをタップしてください。";
+                _changedPlayerPanel.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         });
     }

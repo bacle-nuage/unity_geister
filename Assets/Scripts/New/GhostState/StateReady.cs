@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using DefaultNamespace.Services;
 using UnityEngine;
 
@@ -17,6 +18,11 @@ namespace DefaultNamespace
                 if (owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().IsActive.Value)
                 {
                     owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().TurnEndButton.SetActive(true);
+                    
+                    String MainSystemName = "MainSystem";
+                    GameObject MainSystem = GameObject.Find(MainSystemName);
+                    // Debug.Log("initialPosLeadPanel true");
+                    MainSystem.GetComponent<MainSystem>().InitialPosLead.SetActive(true);
                 }
             }
             

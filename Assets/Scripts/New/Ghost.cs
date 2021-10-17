@@ -96,7 +96,7 @@ namespace DefaultNamespace
             _currentState.OnExit(this, nextState);
             nextState.OnEnter(this, _currentState);
             _currentState = nextState;
-            Debug.Log("_currentState = " + _currentState);
+            // Debug.Log("_currentState = " + _currentState);
         }
         
         public enum GhostColor

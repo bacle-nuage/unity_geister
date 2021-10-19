@@ -118,6 +118,7 @@ namespace DefaultNamespace
             // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             // _currentState.OnEnter(this, null);
             LastMovedListener();
+            IsActiveListener();
             _prevButton.SetActive(false);
         }
 
@@ -186,6 +187,31 @@ namespace DefaultNamespace
                     _prevButton.SetActive(true);
                 }
             });
+        }
+
+        private void IsActiveListener()
+        {
+            this.IsActive.Where(x => x)
+                .Subscribe((_is_Active) =>
+                {
+                    if (_is_Active && this.IsReady)
+                    {
+                        String MainSystemName = "MainSystem";
+                        GameObject MainSystem = GameObject.Find(MainSystemName);
+                        // Debug.Log("initialPosLeadPanel 1");
+                        // Debug.Log(this.gameObject.name);
+                        if (this.gameObject.name == "Player1")
+                        {
+                            MainSystem.GetComponent<MainSystem>().InitialPosLead.transform.rotation = Quaternion.Euler(0, 0, 0);;
+                            MainSystem.GetComponent<MainSystem>().InitialPosLead.SetActive(true);
+                        }
+                        else
+                        {
+                            MainSystem.GetComponent<MainSystem>().InitialPosLead.transform.rotation = Quaternion.Euler(0, 0, 180);;
+                            MainSystem.GetComponent<MainSystem>().InitialPosLead.SetActive(true);
+                        }
+                    }
+                });
         }
     }
 }

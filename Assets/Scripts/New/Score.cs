@@ -44,8 +44,8 @@ namespace DefaultNamespace
  
         void Update()
         {
-            _redScoreText.text = "赤: " + _redScore.ToString();
-            _blueScoreText.text = "青: " + _blueScore.ToString();
+            _redScoreText.text = "× " + _redScore.ToString();
+            _blueScoreText.text = "× " + _blueScore.ToString();
         }
 
         void ScoreListener()

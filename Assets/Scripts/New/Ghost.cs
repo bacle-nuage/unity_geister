@@ -2,11 +2,12 @@
 using System.Reflection;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DefaultNamespace
 {
     // ゴースト
-    public partial class Ghost : MonoBehaviour
+    public partial class Ghost : MonoBehaviour, BeingWatched
     {
         public readonly GhostStateBase _stateReady = new StateReady();
         public readonly GhostStateBase _stateReadyTouched = new StateReadyTouched();
@@ -57,6 +58,8 @@ namespace DefaultNamespace
         {
             get => _hiddenSprite;
         }
+        
+        private Image _childrenSpriteRenderer;
 
         private void Awake()
         {
@@ -73,6 +76,7 @@ namespace DefaultNamespace
             _currentState.OnEnter(this, null);
             UnitIsActiveListener();
             // _player.gameObject.GetComponent<Unit>().LastMoved.Value = new Vector3[,] {{this.gameObject.transform.position, this.gameObject.transform.position}};
+            _childrenSpriteRenderer = this.transform.GetChild(0).gameObject.GetComponent<Image>();
         }
 
         private void Update()
@@ -175,5 +179,17 @@ namespace DefaultNamespace
         //
         //     return MyColor;
         // }
+
+        public void Watched()
+        {
+            Color Color = _childrenSpriteRenderer.color;
+            _childrenSpriteRenderer.color = new Color(Color.r, Color.g, Color.b, 0.6f);
+        }
+
+        public void Out()
+        {
+            Color Color = _childrenSpriteRenderer.color;
+            _childrenSpriteRenderer.color = new Color(Color.r, Color.g, Color.b, 0f);
+        }
     }
 }

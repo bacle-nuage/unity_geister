@@ -7,7 +7,7 @@ namespace DefaultNamespace.Services
     {
         public static void createDummyGhost(Vector3 pos)
         {
-            Color color = new Color32(10,10,10,0);
+            Color color = new Color(255f,171f,0,0);
             String parentName = "Dummy";
             GameObject parentGameObject = GameObject.Find(parentName);
             Texture2D tex = new Texture2D (

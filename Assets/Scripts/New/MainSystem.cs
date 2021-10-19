@@ -129,14 +129,14 @@ public class MainSystem : MonoBehaviour
             {
                 _player2.IsActive.Value = false;
                 _player1.IsActive.Value = true;
-                _changedPlayerText.text = "プレイヤー2のターンです。\n相手に渡してここをタップしてください。";
+                _changedPlayerText.text = "プレイヤー2のターンです。\nプレイヤーが変わったらここをタップしてください。";
                 _changedPlayerPanel.transform.rotation = Quaternion.Euler(0, 0, 180);
             }
             else
             {
                 _player1.IsActive.Value = false;
                 _player2.IsActive.Value = true;
-                _changedPlayerText.text = "プレイヤー1のターンです\n相手に渡してここをタップしてください。";
+                _changedPlayerText.text = "プレイヤー1のターンです\nプレイヤーが変わったらここをタップしてください。";
                 _changedPlayerPanel.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         });

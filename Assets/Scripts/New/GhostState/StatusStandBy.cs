@@ -14,7 +14,6 @@ namespace DefaultNamespace
             /// ステートを開始した時に呼ばれる
             /// </summary>
             public override void OnEnter(Ghost owner, GhostStateBase prevState) {
-                // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
 
                 // このobjectのSpriteRendererを取得
                 _mainSpriteRenderer = owner.gameObject.GetComponent<SpriteRenderer>();
@@ -22,9 +21,7 @@ namespace DefaultNamespace
                 // _mainColor = _mainSpriteRenderer.color;
             
                 // 色を判断できないようにする
-                // Debug.Log(_mainSpriteRenderer.color);
                 // _mainSpriteRenderer.color = GetColor(GhostColor.Gray);
-                // Debug.Log(_mainSpriteRenderer.color);
                 _mainSpriteRenderer.sprite = owner.HiddenSprite;
             }
             

@@ -14,22 +14,14 @@ namespace DefaultNamespace
             /// </summary>
             public override void OnEnter(Ghost owner, GhostStateBase prevState)
             {
-                Debug.Log(owner);
-                Debug.Log(owner.gameObject);
-                Debug.Log(owner.gameObject.transform);
-                Debug.Log(owner.gameObject.transform.parent);
-                Debug.Log(owner.gameObject.transform.parent.gameObject);
-                Debug.Log(owner.gameObject.transform.parent.gameObject.GetComponent<Unit>());
                 if (owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().IsActive.Value)
                 {
                     owner.gameObject.transform.parent.gameObject.GetComponent<Unit>().TurnEndButton.SetActive(true);
                     
                     // String MainSystemName = "MainSystem";
                     // GameObject MainSystem = GameObject.Find(MainSystemName);
-                    // Debug.Log("initialPosLeadPanel 1");
                     // if (owner.transform.tag == "Player2")
                     // {
-                    //     Debug.Log("initialPosLeadPanel 2");
                     //     MainSystem.GetComponent<MainSystem>().InitialPosLead.transform.Rotate(0f, 0f, 180f);
                     // }
                     // MainSystem.GetComponent<MainSystem>().InitialPosLead.SetActive(true);
@@ -50,7 +42,6 @@ namespace DefaultNamespace
 
                     // 親プレーヤーを取得
                     Unit Unit = owner.gameObject.transform.parent.gameObject.GetComponent<Unit>();
-                    // Debug.Log(Unit.gameObject.name + ".IsTouched = " + Unit.IsTouched);
 
                     if (!_isOnUpdatePass && !Unit.IsTouched && hit && hit.collider.gameObject == owner.gameObject)
                     {
@@ -79,7 +70,6 @@ namespace DefaultNamespace
             /// </summary>
             public override void OnExit(Ghost owner, GhostStateBase nextState)
             {
-                // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             }
         }
     }

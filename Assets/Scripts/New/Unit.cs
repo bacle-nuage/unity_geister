@@ -115,7 +115,6 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             // _currentState.OnEnter(this, null);
             LastMovedListener();
             IsActiveListener();
@@ -124,13 +123,11 @@ namespace DefaultNamespace
 
         private void Update()
         {
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             // _currentState.OnUpdate(this);
         }
 
         private void FixedUpdate()
         {
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             // _currentState.OnFixedUpdate(this);
         }
 
@@ -198,8 +195,6 @@ namespace DefaultNamespace
                     {
                         String MainSystemName = "MainSystem";
                         GameObject MainSystem = GameObject.Find(MainSystemName);
-                        // Debug.Log("initialPosLeadPanel 1");
-                        // Debug.Log(this.gameObject.name);
                         if (this.gameObject.name == "Player1")
                         {
                             MainSystem.GetComponent<MainSystem>().InitialPosLead.transform.rotation = Quaternion.Euler(0, 0, 0);;

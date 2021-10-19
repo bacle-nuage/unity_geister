@@ -69,7 +69,6 @@ namespace DefaultNamespace
         private void Start()
         {
             // _myColor = GetMyColor();
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             _player = this.gameObject.transform.parent.gameObject;
             _currentState = _stateReady;
             _currentColor = GetColor(GhostColor.Gray);
@@ -81,26 +80,20 @@ namespace DefaultNamespace
 
         private void Update()
         {
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-            // Debug.Log("_currentState" + _currentState.GetType().Name);
             _currentState.OnUpdate(this);
         }
 
         private void FixedUpdate()
         {
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             _currentState.OnFixedUpdate(this);
         }
 
         // ステート変更
         public void ChangeState(GhostStateBase nextState)
         {
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-            // Debug.Log(this.gameObject.transform.parent.gameObject.name + " " + this.gameObject.name + " _currentState = " + _currentState);
             _currentState.OnExit(this, nextState);
             nextState.OnEnter(this, _currentState);
             _currentState = nextState;
-            // Debug.Log("_currentState = " + _currentState);
         }
         
         public enum GhostColor
@@ -135,11 +128,8 @@ namespace DefaultNamespace
             Unit.IsActive
                 .Subscribe((_is_Active) =>
                 {
-                    // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-                    // Debug.Log(this.gameObject.transform.parent.gameObject.name + ".isActive = " + _is_Active);
                     // Unit Unit = this.gameObject.transform.parent.gameObject.GetComponent<Unit>();
                     Unit Unit = _player.GetComponent<Unit>();
-                    // Debug.Log(this.gameObject.transform.parent.gameObject.name + ".IsReady = " + Unit.IsReady);
 
                     if (_is_Active)
                     {

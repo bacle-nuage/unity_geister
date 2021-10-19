@@ -14,7 +14,6 @@ namespace DefaultNamespace
             /// </summary>
             public override void OnEnter(Ghost owner, GhostStateBase prevState)
             {
-                // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             }
             
             // if分の中のにはいったかどうか
@@ -32,7 +31,6 @@ namespace DefaultNamespace
                     //
                     // if (hit && hit.collider.gameObject == owner.gameObject)
                     // {
-                    //     Debug.Log("HIT");
                     //     owner.ChangeState(owner._statePlay);
                     //     return;
                     // }

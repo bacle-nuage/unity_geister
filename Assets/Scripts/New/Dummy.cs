@@ -14,14 +14,12 @@ namespace DefaultNamespace
 
         public void Watched()
         {
-            Debug.Log("Dummy watched");
             Color Color = _spriteRenderer.color;
             _spriteRenderer.color = new Color(Color.r, Color.g, Color.b, 0.3f);
         }
 
         public void Out()
         {
-            Debug.Log("Dummy out");
             Color Color = _spriteRenderer.color;
             _spriteRenderer.color = new Color(Color.r, Color.g, Color.b, 0f);
         }

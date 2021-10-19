@@ -13,7 +13,6 @@ namespace DefaultNamespace
             /// </summary>
             public override void OnEnter(Ghost owner, GhostStateBase prevState)
             {
-                // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             }
             
             // if分の中のにはいったかどうか
@@ -30,7 +29,6 @@ namespace DefaultNamespace
 
                     // 親プレーヤーを取得
                     Unit Unit = owner.gameObject.transform.parent.gameObject.GetComponent<Unit>();
-                    // Debug.Log(Unit.gameObject.name + ".IsTouched = " + Unit.IsTouched);
 
                     if (!Unit.IsMoved && !_isOnUpdatePass && !Unit.IsTouched && hit && hit.collider.gameObject == owner.gameObject)
                     {
@@ -59,7 +57,6 @@ namespace DefaultNamespace
             /// </summary>
             public override void OnExit(Ghost owner, GhostStateBase nextState)
             {
-                // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
             }
         }   
     }

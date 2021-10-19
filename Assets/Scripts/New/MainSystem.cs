@@ -50,15 +50,12 @@ public class MainSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
         OnChangedIsPlayerFlg();
         ChangedGameOverListener();
         _resultPanel.SetActive(false);
         _changedPlayerPanel.SetActive(false);
-        // Debug.Log("initialPosLeadPanel false");
         _initialPosLead.SetActive(false);
         _isGameOver.Value = false;
-        // Debug.Log("main system start isplayer1 = true");
         _isPlayer1.Value = true;
         _player1.TurnEndButton.SetActive(false);
         _player2.TurnEndButton.SetActive(false);
@@ -76,9 +73,7 @@ public class MainSystem : MonoBehaviour
         {
             return;
         }
-        // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
         _changedPlayerPanel.SetActive(true);
-        // Debug.Log("initialPosLeadPanel false 2");
         _initialPosLead.SetActive(false);
         
         _player2.IsActive.Value = false;
@@ -105,7 +100,6 @@ public class MainSystem : MonoBehaviour
 
     public void PushPlayerChangedButton()
     {
-        // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
         _player1.gameObject.GetComponent<Unit>().IsMoved = false;
         _player2.gameObject.GetComponent<Unit>().IsMoved = false;
         ChangePlayer();
@@ -114,7 +108,6 @@ public class MainSystem : MonoBehaviour
 
     public void ChangePlayer()
     {
-        Debug.Log("changed player");
         _isPlayer1.Value = !_isPlayer1.Value;
     }
 
@@ -122,9 +115,6 @@ public class MainSystem : MonoBehaviour
     {
         _isPlayer1.Subscribe((_isPlayer1) =>
         {
-            // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-            // Debug.Log("############# player changed ratate 180 _isPlayer1 = " + _isPlayer1);
-            // Debug.Log(_changedPlayerPanel.transform.localEulerAngles);
             if (_isPlayer1)
             {
                 _player2.IsActive.Value = false;
@@ -162,7 +152,6 @@ public class MainSystem : MonoBehaviour
 
                 _winnerText.text = _winner.Name + "の勝利";
                 
-                // Debug.Log(this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
                 _resultPanel.SetActive(true);
             });
     }

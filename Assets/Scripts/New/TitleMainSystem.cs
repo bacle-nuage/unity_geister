@@ -23,4 +23,10 @@ public class TitleMainSystem : MonoBehaviour
         String to = "GameScene";
         SceneManager.LoadScene(to);
     }
+
+    public void onClickToDescriptionButton()
+    {
+        String to = "DescriptionScene";
+        SceneManager.LoadScene(to);
+    }
 }
